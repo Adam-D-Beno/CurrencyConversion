@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="fastRequestHistoryConfig">
+    <option name="historyList">
+      <list>
+        <ResponseHistory>
+          <option name="className" />
+          <option name="code" value="500" />
+          <option name="enableEnv" value="dev" />
+          <option name="enableProject" value="CurrencyConversion" />
+          <option name="method" />
+          <option name="methodType" value="GET" />
+          <option name="paramGroup">
+            <ParamGroupCollection>
+              <option name="methodDescription" />
+              <option name="methodType" value="PATCH" />
+              <option name="multipartKeyValueListJson" value="[]" />
+              <option name="pathParamsKeyValueListJson" value="[]" />
+              <option name="url" value="http://localhost:8080/exchangeRate/RUBUSD" />
+              <option name="urlEncodedKeyValueListJson" value="[{&quot;customFlag&quot;:2,&quot;enabled&quot;:true,&quot;key&quot;:&quot;adm&quot;,&quot;type&quot;:&quot;String&quot;,&quot;value&quot;:&quot;adm1&quot;}]" />
+              <option name="urlEncodedKeyValueListText" value="adm=adm1" />
+              <option name="urlParamsKeyValueListJson" value="[]" />
+            </ParamGroupCollection>
+          </option>
+          <option name="requestInfo" value="Request Url: http://localhost:8080/exchangeRate/RUBUSD&#13;&#10;Request Headers: &#13;&#10;    Accept: application/json,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8&#13;&#10;    User-Agent: Fast Request/2024.1.4&#13;&#10;    Accept-Encoding: gzip, deflate&#13;&#10;Request Body: &#13;&#10;    null&#13;&#10;" />
+          <option name="response" value="&lt;!doctype html&gt;&lt;html lang=&quot;ru&quot;&gt;&lt;head&gt;&lt;title&gt;HTTP Status 500 – Внутренняя ошибка сервера&lt;/title&gt;&lt;style type=&quot;text/css&quot;&gt;body {font-family:Tahoma,Arial,sans-serif;} h1, h2, h3, b {color:white;background-color:#525D76;} h1 {font-size:22px;} h2 {font-size:16px;} h3 {font-size:14px;} p {font-size:12px;} a {color:black;} .line {height:1px;background-color:#525D76;border:none;}&lt;/style&gt;&lt;/head&gt;&lt;body&gt;&lt;h1&gt;HTTP Status 500 – Внутренняя ошибка сервера&lt;/h1&gt;&lt;hr class=&quot;line&quot; /&gt;&lt;p&gt;&lt;b&gt;Type&lt;/b&gt; Exception Report&lt;/p&gt;&lt;p&gt;&lt;b&gt;Message&lt;/b&gt; Cannot invoke &amp;quot;String.trim()&amp;quot; because &amp;quot;in&amp;quot; is null&lt;/p&gt;&lt;p&gt;&lt;b&gt;Description&lt;/b&gt; The server encountered an unexpected condition that prevented it from fulfilling the request.&lt;/p&gt;&lt;p&gt;&lt;b&gt;Exception&lt;/b&gt;&lt;/p&gt;&lt;pre&gt;java.lang.NullPointerException: Cannot invoke &amp;quot;String.trim()&amp;quot; because &amp;quot;in&amp;quot; is null&#13;&#10;&#9;java.base&amp;#47;jdk.internal.math.FloatingDecimal.readJavaFormatString(FloatingDecimal.java:1838)&#13;&#10;&#9;java.base&amp;#47;jdk.internal.math.FloatingDecimal.parseDouble(FloatingDecimal.java:110)&#13;&#10;&#9;java.base&amp;#47;java.lang.Double.parseDouble(Double.java:651)&#13;&#10;&#9;com.edu.servlet.ExchangeRateServlet.doPatch(ExchangeRateServlet.java:47)&#13;&#10;&#9;com.edu.servlet.ExchangeRateServlet.service(ExchangeRateServlet.java:30)&#13;&#10;&#9;jakarta.servlet.http.HttpServlet.service(HttpServlet.java:658)&#13;&#10;&#9;org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:51)&#13;&#10;&lt;/pre&gt;&lt;p&gt;&lt;b&gt;Note&lt;/b&gt; The full stack trace of the root cause is available in the server logs.&lt;/p&gt;&lt;hr class=&quot;line&quot; /&gt;&lt;h3&gt;Apache Tomcat/10.1.15&lt;/h3&gt;&lt;/body&gt;&lt;/html&gt;" />
+          <option name="url" value="http://localhost:8080/exchangeRate/RUBUSD" />
+        </ResponseHistory>
+      </list>
+    </option>
+  </component>
+</project>
