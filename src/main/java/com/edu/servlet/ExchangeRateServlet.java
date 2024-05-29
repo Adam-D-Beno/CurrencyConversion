@@ -4,7 +4,7 @@ import com.edu.dto.ExchangeRatesDTO;
 import com.edu.exception.CurrencyNotExistInDataBase;
 import com.edu.exception.WrongCurrencyCode;
 import com.edu.exception.WrongFormFields;
-import com.edu.service.ServiceExchangeRates;
+import com.edu.service.ServiceExchangeRatesImpl;
 import com.edu.dto.ResponseErrorDto;
 import com.edu.validation.ValidateExchangeRate;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -21,12 +21,12 @@ import java.util.List;
 
 @WebServlet(name = "ExchangeRateServlet", urlPatterns = "/exchangeRate/*")
 public class ExchangeRateServlet extends HttpServlet {
-    private final ServiceExchangeRates serviceExchangeRates;
+    private final ServiceExchangeRatesImpl serviceExchangeRatesImpl;
     private final ObjectMapper objectMapper;
     private final ValidateExchangeRate validateExchangeRate;
 
     public ExchangeRateServlet() {
-        serviceExchangeRates = new ServiceExchangeRates();
+        serviceExchangeRatesImpl = new ServiceExchangeRatesImpl();
         objectMapper = new ObjectMapper();
         validateExchangeRate = new ValidateExchangeRate();
     }
@@ -50,7 +50,7 @@ public class ExchangeRateServlet extends HttpServlet {
             validateExchangeRate.validateExchangeRate(req);
             List<String> currencyCodes = getCurrencyCodes(req);
 
-            ExchangeRatesDTO exchangeRatesDTO = serviceExchangeRates.getSpecificExchangeRate(currencyCodes);
+            ExchangeRatesDTO exchangeRatesDTO = serviceExchangeRatesImpl.getSpecificExchangeRate(currencyCodes);
             resp.setStatus(200);
             resp.getWriter().println("Успех - " + resp.getStatus());
             resp.getWriter().println(objectMapper.writeValueAsString(exchangeRatesDTO));
@@ -82,7 +82,7 @@ public class ExchangeRateServlet extends HttpServlet {
 
            BigDecimal rate = getExchangeRates(requestParameter);
 
-           ExchangeRatesDTO exchangeRatesDTO = serviceExchangeRates.updateExchangeRate(currencyCodes, rate);
+           ExchangeRatesDTO exchangeRatesDTO = serviceExchangeRatesImpl.updateExchangeRate(currencyCodes, rate);
 
            resp.setStatus(200);
            resp.getWriter().println(objectMapper.writeValueAsString(exchangeRatesDTO));

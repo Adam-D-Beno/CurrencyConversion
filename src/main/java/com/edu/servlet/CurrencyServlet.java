@@ -3,7 +3,7 @@ package com.edu.servlet;
 import com.edu.dto.CurrencyDTO;
 import com.edu.exception.CurrencyNotExistInDataBase;
 import com.edu.exception.WrongCurrencyCode;
-import com.edu.service.ServiceCurrencies;
+import com.edu.service.ServiceCurrenciesImpl;
 import com.edu.dto.ResponseErrorDto;
 import com.edu.validation.ValidationCurrencies;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -17,12 +17,12 @@ import java.sql.SQLException;
 
 @WebServlet(name = "CurrencyServlet", urlPatterns = "/currency/*")
 public class CurrencyServlet extends HttpServlet {
-    private final ServiceCurrencies serviceCurrencies;
+    private final ServiceCurrenciesImpl serviceCurrenciesImpl;
     private final ObjectMapper objectMapper;
     private final ValidationCurrencies validationCurrencies;
 
     public CurrencyServlet() {
-        serviceCurrencies = new ServiceCurrencies();
+        serviceCurrenciesImpl = new ServiceCurrenciesImpl();
         objectMapper = new ObjectMapper();
         validationCurrencies = new ValidationCurrencies();
     }
@@ -34,7 +34,7 @@ public class CurrencyServlet extends HttpServlet {
 
             validationCurrencies.validationCurrency(req);
             String currency = getCurrencyCode(req).trim().toUpperCase();
-            CurrencyDTO currencyDTO = serviceCurrencies.getSpecificCurrency(currency);
+            CurrencyDTO currencyDTO = serviceCurrenciesImpl.getSpecificCurrency(currency);
             resp.setStatus(200);
             resp.getWriter().println("Успех -" + resp.getStatus());
             resp.getWriter().print(objectMapper.writeValueAsString(currencyDTO));

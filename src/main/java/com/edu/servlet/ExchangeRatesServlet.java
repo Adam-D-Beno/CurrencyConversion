@@ -3,7 +3,7 @@ package com.edu.servlet;
 import com.edu.dto.ExchangeRatesDTO;
 import com.edu.exception.CurrencyNotExistInDataBase;
 import com.edu.exception.WrongFormFields;
-import com.edu.service.ServiceExchangeRates;
+import com.edu.service.ServiceExchangeRatesImpl;
 import com.edu.dto.ResponseErrorDto;
 import com.edu.validation.ValidateExchangeRate;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -18,12 +18,12 @@ import java.util.List;
 
 @WebServlet(name = "ExchangeRatesServlet", urlPatterns = "/exchangeRates")
 public class ExchangeRatesServlet extends HttpServlet {
-    private final ServiceExchangeRates serviceExchangeRates;
+    private final ServiceExchangeRatesImpl serviceExchangeRatesImpl;
     private final ObjectMapper objectMapper;
     private final ValidateExchangeRate validateExchangeRate;
 
     public ExchangeRatesServlet() {
-        serviceExchangeRates = new ServiceExchangeRates();
+        serviceExchangeRatesImpl = new ServiceExchangeRatesImpl();
         objectMapper = new ObjectMapper();
         validateExchangeRate = new ValidateExchangeRate();
     }
@@ -33,7 +33,7 @@ public class ExchangeRatesServlet extends HttpServlet {
 
         try {
 
-            List<ExchangeRatesDTO> exchangeRatesDto = serviceExchangeRates.getListOfExchangeRates();
+            List<ExchangeRatesDTO> exchangeRatesDto = serviceExchangeRatesImpl.getListOfExchangeRates();
             resp.setStatus(200);
             resp.getWriter().println(objectMapper.writeValueAsString(exchangeRatesDto));
 
@@ -52,7 +52,7 @@ public class ExchangeRatesServlet extends HttpServlet {
             List<String> currencyCodes = getCurrencyCodes(req);
             BigDecimal rate = getExchangeRates(req);
 
-            ExchangeRatesDTO exchangeRatesDTO = serviceExchangeRates.
+            ExchangeRatesDTO exchangeRatesDTO = serviceExchangeRatesImpl.
                     addNewExchangeRates(currencyCodes, rate);
             resp.setStatus(201);
             resp.getWriter().println("Успех -" + resp.getStatus());

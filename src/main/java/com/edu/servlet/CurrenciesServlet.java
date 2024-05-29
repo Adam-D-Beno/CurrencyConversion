@@ -3,7 +3,7 @@ package com.edu.servlet;
 import com.edu.dto.CurrencyDTO;
 import com.edu.exception.WrongFormFields;
 import com.edu.model.Currency;
-import com.edu.service.ServiceCurrencies;
+import com.edu.service.ServiceCurrenciesImpl;
 import com.edu.dto.ResponseErrorDto;
 import com.edu.validation.ValidationCurrencies;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -18,12 +18,12 @@ import java.util.List;
 @WebServlet(name = "CurrenciesServlet", urlPatterns = "/currencies")
 public class CurrenciesServlet extends HttpServlet {
 
-    private final ServiceCurrencies serviceCurrencies;
+    private final ServiceCurrenciesImpl serviceCurrenciesImpl;
     private final ObjectMapper objectMapper;
     private final ValidationCurrencies validationCurrencies;
 
     public CurrenciesServlet() {
-       serviceCurrencies = new ServiceCurrencies();
+       serviceCurrenciesImpl = new ServiceCurrenciesImpl();
        objectMapper = new ObjectMapper();
        validationCurrencies = new ValidationCurrencies();
     }
@@ -31,7 +31,7 @@ public class CurrenciesServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         try {
-            List<CurrencyDTO> currenciesDTO = serviceCurrencies.getListOfCurrencies();
+            List<CurrencyDTO> currenciesDTO = serviceCurrenciesImpl.getListOfCurrencies();
             resp.setStatus(200);
             resp.getWriter().println("Успех " + resp.getStatus());
             resp.getWriter().println(objectMapper.writeValueAsString(currenciesDTO));
@@ -51,7 +51,7 @@ public class CurrenciesServlet extends HttpServlet {
 
            Currency currency = getCurrency(req);
 
-           CurrencyDTO currencyDTO =  serviceCurrencies.addNewCurrencies(currency);
+           CurrencyDTO currencyDTO =  serviceCurrenciesImpl.addNewCurrencies(currency);
            resp.setStatus(201);
            resp.getWriter().println("Успех " + resp.getStatus());
            resp.getWriter().println(objectMapper.writeValueAsString(currencyDTO));

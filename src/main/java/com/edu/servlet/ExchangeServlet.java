@@ -4,7 +4,7 @@ import com.edu.dto.CurrencyExchangeDTO;
 import com.edu.exception.CurrencyNotExistInDataBase;
 import com.edu.exception.WrongFormFields;
 import com.edu.exception.WrongRateInExchangeRate;
-import com.edu.service.ServiceConvertCurrencies;
+import com.edu.service.ServiceConvertCurrenciesImpl;
 import com.edu.dto.ResponseErrorDto;
 import com.edu.validation.ValidateExchange;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -19,12 +19,12 @@ import java.util.List;
 
 @WebServlet(name = "ExchangeServlet", urlPatterns = "/exchange")
 public class ExchangeServlet extends HttpServlet {
-    private final ServiceConvertCurrencies serviceConvertCurrencies;
+    private final ServiceConvertCurrenciesImpl serviceConvertCurrenciesImpl;
     private final ObjectMapper objectMapper;
     private final ValidateExchange validateExchange;
 
     public ExchangeServlet() {
-        serviceConvertCurrencies = new ServiceConvertCurrencies();
+        serviceConvertCurrenciesImpl = new ServiceConvertCurrenciesImpl();
         objectMapper = new ObjectMapper();
         validateExchange = new ValidateExchange();
     }
@@ -38,7 +38,7 @@ public class ExchangeServlet extends HttpServlet {
            var currencyCodes = getCurrencyCodes(req);
            var amount= getAmount(req);
 
-           CurrencyExchangeDTO currencyExchangeDTO = serviceConvertCurrencies.convert(currencyCodes, amount);
+           CurrencyExchangeDTO currencyExchangeDTO = serviceConvertCurrenciesImpl.convert(currencyCodes, amount);
            resp.setStatus(200);
            resp.getWriter().print(objectMapper.writeValueAsString("Успех - ") + resp.getStatus() + "\n");
            resp.getWriter().print(objectMapper.writeValueAsString(currencyExchangeDTO));
