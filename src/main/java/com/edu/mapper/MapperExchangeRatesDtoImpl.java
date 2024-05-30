@@ -1,22 +1,22 @@
 package com.edu.mapper;
 
-import com.edu.config.ConnectionDao;
-import com.edu.config.ConnectionDaoSqlLiteImpl;
-import com.edu.dao.CrudDao;
 import com.edu.dao.CurrencyDaoImpl;
 import com.edu.dao.SpecificCurrencyDao;
 import com.edu.dto.CurrencyDTO;
 import com.edu.dto.ExchangeRatesDTO;
 import com.edu.model.Currency;
 import com.edu.model.ExchangeRates;
-
 import java.sql.SQLException;
 import java.util.Optional;
 
 public class MapperExchangeRatesDtoImpl implements MapperDto<ExchangeRates, ExchangeRatesDTO> {
-    private final ConnectionDao connectionDao = new ConnectionDaoSqlLiteImpl();
-    private final SpecificCurrencyDao<Currency> currencyDao = new CurrencyDaoImpl(connectionDao);
-    private final MapperDto<Currency, CurrencyDTO> mapperCurrencyDto = new MapperCurrencyDtoImpl();
+    private final SpecificCurrencyDao<Currency> currencyDao;
+    private final MapperDto<Currency, CurrencyDTO> mapperCurrencyDto;
+
+    public MapperExchangeRatesDtoImpl() {
+        this.currencyDao = new CurrencyDaoImpl();
+        this.mapperCurrencyDto = new MapperCurrencyDtoImpl();
+    }
 
     @Override
     public ExchangeRatesDTO toDto(ExchangeRates exchangeRates) {

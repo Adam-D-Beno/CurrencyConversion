@@ -1,10 +1,8 @@
 package com.edu.dao;
 
 import com.edu.config.ConnectionDao;
-import com.edu.model.Currency;
+import com.edu.config.ConnectionDaoSqlLiteImpl;
 import com.edu.model.ExchangeRates;
-import org.jetbrains.annotations.NotNull;
-
 import java.math.BigDecimal;
 import java.sql.*;
 import java.util.ArrayList;
@@ -32,11 +30,8 @@ public class ExchangeRatesDaoImpl implements SpecificExchangeRatesDao<ExchangeRa
             "RETURNING ID;";
 
 
-    public ExchangeRatesDaoImpl(ConnectionDao connectionDao) {
-        this.connectionDao = connectionDao;
-    }
-
     public ExchangeRatesDaoImpl() {
+        this.connectionDao = new ConnectionDaoSqlLiteImpl();
     }
 
     @Override

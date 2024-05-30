@@ -1,6 +1,7 @@
 package com.edu.dao;
 
 import com.edu.config.ConnectionDao;
+import com.edu.config.ConnectionDaoSqlLiteImpl;
 import com.edu.model.Currency;
 import java.sql.*;
 import java.util.ArrayList;
@@ -9,18 +10,15 @@ import java.util.Optional;
 import java.util.stream.Stream;
 
 public class CurrencyDaoImpl implements SpecificCurrencyDao<Currency> {
-    private ConnectionDao connectionDao;
+    private final ConnectionDao connectionDao;
     private static final String GET_ALL_CURRENCIES = "SELECT * FROM Currencies";
     private static final String GET_BY_CODE = "SELECT * FROM Currencies where code = ?";
     private static final String SAVE = "INSERT INTO Currencies (Code, FullName, Sign) VALUES(?, ?, ?)" +
             "RETURNING id";
     private final String GET_BY_ID = "SELECT * FROM Currencies where id = ?";
 
-    public CurrencyDaoImpl(ConnectionDao connectionDao) {
-        this.connectionDao = connectionDao;
-    }
-
     public CurrencyDaoImpl() {
+        this.connectionDao = new ConnectionDaoSqlLiteImpl();
     }
 
     @Override

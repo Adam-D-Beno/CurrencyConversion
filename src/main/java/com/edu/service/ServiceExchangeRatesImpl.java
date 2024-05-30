@@ -1,7 +1,5 @@
 package com.edu.service;
 
-import com.edu.config.ConnectionDao;
-import com.edu.config.ConnectionDaoSqlLiteImpl;
 import com.edu.dao.*;
 import com.edu.dto.ExchangeRatesDTO;
 import com.edu.exception.CurrencyNotExistInDataBase;
@@ -9,23 +7,20 @@ import com.edu.mapper.MapperDto;
 import com.edu.mapper.MapperExchangeRatesDtoImpl;
 import com.edu.model.Currency;
 import com.edu.model.ExchangeRates;
-
 import java.math.BigDecimal;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.Optional;
 
 public class ServiceExchangeRatesImpl implements ServiceExchangeRates{
-    private final ConnectionDao connectionDao;
     private final SpecificExchangeRatesDao<ExchangeRates> exchangeRatesDao;
     private final SpecificCurrencyDao<Currency> currencyDao;
     private final MapperDto<ExchangeRates, ExchangeRatesDTO> exchangeRatesMapperDto;
 
     public ServiceExchangeRatesImpl() {
-         connectionDao = new ConnectionDaoSqlLiteImpl();
-         exchangeRatesDao = new ExchangeRatesDaoImpl(connectionDao);
-         currencyDao = new CurrencyDaoImpl(connectionDao);
-         exchangeRatesMapperDto = new MapperExchangeRatesDtoImpl();
+        this. exchangeRatesDao = new ExchangeRatesDaoImpl();
+        this. currencyDao = new CurrencyDaoImpl();
+        this. exchangeRatesMapperDto = new MapperExchangeRatesDtoImpl();
     }
 
     @Override

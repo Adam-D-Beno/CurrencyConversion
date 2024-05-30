@@ -1,7 +1,5 @@
 package com.edu.service;
 
-import com.edu.config.ConnectionDao;
-import com.edu.config.ConnectionDaoSqlLiteImpl;
 import com.edu.dao.CurrencyDaoImpl;
 import com.edu.dao.ExchangeRatesDaoImpl;
 import com.edu.dao.SpecificCurrencyDao;
@@ -12,7 +10,6 @@ import com.edu.exception.WrongRateInExchangeRate;
 import com.edu.mapper.*;
 import com.edu.model.Currency;
 import com.edu.model.ExchangeRates;
-
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.sql.SQLException;
@@ -20,16 +17,14 @@ import java.util.List;
 import java.util.Optional;
 
 public class ServiceConvertCurrenciesImpl implements ServiceConvertCurrencies{
-    private final ConnectionDao connectionDao;
     private final SpecificExchangeRatesDao<ExchangeRates> exchangeRatesDao;
     private final  SpecificCurrencyDao<Currency> currencyDao;
     private final MapperCurrencyExchangeDto<ExchangeRates, CurrencyExchangeDTO> mapperDto;
 
     public ServiceConvertCurrenciesImpl() {
-        connectionDao = new ConnectionDaoSqlLiteImpl();
-        exchangeRatesDao = new ExchangeRatesDaoImpl(connectionDao);
-        currencyDao = new CurrencyDaoImpl(connectionDao);
-        mapperDto = new MapperCurrencyExchangeDTOImpl();
+        this.exchangeRatesDao = new ExchangeRatesDaoImpl();
+        this.currencyDao = new CurrencyDaoImpl();
+        this.mapperDto = new MapperCurrencyExchangeDTOImpl();
     }
 
     @Override

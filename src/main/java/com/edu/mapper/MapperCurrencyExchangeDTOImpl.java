@@ -1,23 +1,24 @@
 package com.edu.mapper;
 
-import com.edu.config.ConnectionDao;
-import com.edu.config.ConnectionDaoSqlLiteImpl;
-import com.edu.dao.CrudDao;
 import com.edu.dao.CurrencyDaoImpl;
 import com.edu.dao.SpecificCurrencyDao;
 import com.edu.dto.CurrencyDTO;
 import com.edu.dto.CurrencyExchangeDTO;
 import com.edu.model.Currency;
 import com.edu.model.ExchangeRates;
-
 import java.math.BigDecimal;
 import java.sql.SQLException;
 import java.util.Optional;
 
 public class MapperCurrencyExchangeDTOImpl implements MapperCurrencyExchangeDto<ExchangeRates, CurrencyExchangeDTO>{
-    private final ConnectionDao connectionDao = new ConnectionDaoSqlLiteImpl();
-    private final SpecificCurrencyDao<Currency> currencyDao = new CurrencyDaoImpl(connectionDao);
-    private final MapperDto<Currency, CurrencyDTO> mapperCurrencyDto = new MapperCurrencyDtoImpl();
+    private final SpecificCurrencyDao<Currency> currencyDao;
+    private final MapperDto<Currency, CurrencyDTO> mapperCurrencyDto;
+
+    public MapperCurrencyExchangeDTOImpl() {
+        this.currencyDao = new CurrencyDaoImpl();
+        this.mapperCurrencyDto = new MapperCurrencyDtoImpl();
+
+    }
 
     @Override
     public CurrencyExchangeDTO toDTO(ExchangeRates exchangeRates, BigDecimal amount, BigDecimal convertedAmount) {
