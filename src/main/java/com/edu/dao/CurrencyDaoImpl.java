@@ -9,7 +9,7 @@ import java.util.Optional;
 import java.util.stream.Stream;
 
 public class CurrencyDaoImpl implements SpecificCurrencyDao<Currency> {
-    private ConnectionDao connectionDao;
+    private final ConnectionDao connectionDao;
     private static final String GET_ALL_CURRENCIES = "SELECT * FROM Currencies";
     private static final String GET_BY_CODE = "SELECT * FROM Currencies where code = ?";
     private static final String SAVE = "INSERT INTO Currencies (Code, FullName, Sign) VALUES(?, ?, ?)" +
@@ -18,9 +18,6 @@ public class CurrencyDaoImpl implements SpecificCurrencyDao<Currency> {
 
     public CurrencyDaoImpl(ConnectionDao connectionDao) {
         this.connectionDao = connectionDao;
-    }
-
-    public CurrencyDaoImpl() {
     }
 
     @Override

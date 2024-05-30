@@ -13,7 +13,7 @@ import java.util.Optional;
 import java.util.stream.Stream;
 
 public class ExchangeRatesDaoImpl implements SpecificExchangeRatesDao<ExchangeRates> {
-    private ConnectionDao connectionDao;
+    private final ConnectionDao connectionDao;
     String crossCurrency = "USD";
     private static final String GET_ALL_EXCHANGE_RATES = "SELECT * FROM ExchangeRates";
     private  static final String INNER_JOIN_EXCHANGE_RATES_WITH_CURRENCIES = "SELECT ex.ID AS ID, " +
@@ -31,12 +31,8 @@ public class ExchangeRatesDaoImpl implements SpecificExchangeRatesDao<ExchangeRa
             "WHERE BaseCurrencyId = ? and TargetCurrencyId = ?\n" +
             "RETURNING ID;";
 
-
     public ExchangeRatesDaoImpl(ConnectionDao connectionDao) {
         this.connectionDao = connectionDao;
-    }
-
-    public ExchangeRatesDaoImpl() {
     }
 
     @Override
