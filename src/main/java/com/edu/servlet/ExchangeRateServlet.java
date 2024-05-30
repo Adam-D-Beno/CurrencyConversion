@@ -46,7 +46,6 @@ public class ExchangeRateServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
 
         try {
-
             validateExchangeRate.validateExchangeRate(req);
             List<String> currencyCodes = getCurrencyCodes(req);
 

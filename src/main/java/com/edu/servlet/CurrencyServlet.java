@@ -31,7 +31,6 @@ public class CurrencyServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
 
         try {
-
             validationCurrencies.validationCurrency(req);
             String currency = getCurrencyCode(req).trim().toUpperCase();
             CurrencyDTO currencyDTO = serviceCurrenciesImpl.getSpecificCurrency(currency);

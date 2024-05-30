@@ -32,7 +32,6 @@ public class ExchangeRatesServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
 
         try {
-
             List<ExchangeRatesDTO> exchangeRatesDto = serviceExchangeRatesImpl.getListOfExchangeRates();
             resp.setStatus(200);
             resp.getWriter().println(objectMapper.writeValueAsString(exchangeRatesDto));

@@ -75,10 +75,10 @@ public class CurrenciesServlet extends HttpServlet {
     }
 
     private Currency getCurrency(HttpServletRequest req) {
-        String name  = req.getParameter("name").trim();
-        String code  = req.getParameter("code").trim();
-        String sign  = req.getParameter("sign").trim();
-
-        return new Currency(code, name,sign);
+        return new Currency(
+                req.getParameter("code").trim(),
+                req.getParameter("name").trim(),
+                req.getParameter("sign").trim()
+        );
     }
 }
