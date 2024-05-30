@@ -1,7 +1,6 @@
 package com.edu.dao;
 
 import com.edu.config.ConnectionDao;
-import com.edu.config.ConnectionDaoSqlLiteImpl;
 import com.edu.model.Currency;
 import java.sql.*;
 import java.util.ArrayList;
@@ -17,8 +16,8 @@ public class CurrencyDaoImpl implements SpecificCurrencyDao<Currency> {
             "RETURNING id";
     private final String GET_BY_ID = "SELECT * FROM Currencies where id = ?";
 
-    public CurrencyDaoImpl() {
-        this.connectionDao = new ConnectionDaoSqlLiteImpl();
+    public CurrencyDaoImpl(ConnectionDao connectionDao) {
+        this.connectionDao = connectionDao;
     }
 
     @Override

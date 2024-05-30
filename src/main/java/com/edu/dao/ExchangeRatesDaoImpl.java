@@ -1,8 +1,10 @@
 package com.edu.dao;
 
 import com.edu.config.ConnectionDao;
-import com.edu.config.ConnectionDaoSqlLiteImpl;
+import com.edu.model.Currency;
 import com.edu.model.ExchangeRates;
+import org.jetbrains.annotations.NotNull;
+
 import java.math.BigDecimal;
 import java.sql.*;
 import java.util.ArrayList;
@@ -12,7 +14,7 @@ import java.util.stream.Stream;
 
 public class ExchangeRatesDaoImpl implements SpecificExchangeRatesDao<ExchangeRates> {
     private final ConnectionDao connectionDao;
-    private final String crossCurrency = "USD";
+    String crossCurrency = "USD";
     private static final String GET_ALL_EXCHANGE_RATES = "SELECT * FROM ExchangeRates";
     private  static final String INNER_JOIN_EXCHANGE_RATES_WITH_CURRENCIES = "SELECT ex.ID AS ID, " +
             "ex.BaseCurrencyId AS Base_id, " +
@@ -29,9 +31,8 @@ public class ExchangeRatesDaoImpl implements SpecificExchangeRatesDao<ExchangeRa
             "WHERE BaseCurrencyId = ? and TargetCurrencyId = ?\n" +
             "RETURNING ID;";
 
-
-    public ExchangeRatesDaoImpl() {
-        this.connectionDao = new ConnectionDaoSqlLiteImpl();
+    public ExchangeRatesDaoImpl(ConnectionDao connectionDao) {
+        this.connectionDao = connectionDao;
     }
 
     @Override
