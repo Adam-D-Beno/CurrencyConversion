@@ -14,7 +14,8 @@ public class ValidateExchange {
         validationIsNull(fromCurrencyCode, toCurrencyCode, amount);
         validationCurrencyCodes(fromCurrencyCode, toCurrencyCode);
         validationEmpty(amount);
-        validationAlphabet(fromCurrencyCode, toCurrencyCode);
+        validationAlphabet(fromCurrencyCode);
+        validationAlphabet(toCurrencyCode);
         validationNumber(amount);
         validationZeroOrNegative(amount);
     }
@@ -25,9 +26,8 @@ public class ValidateExchange {
         }
     }
 
-    private void validationAlphabet(String fromCurrencyCode, String toCurrencyCode) {
-        String concatFromCodeAndToCodes = fromCurrencyCode.trim().concat(toCurrencyCode.trim());
-        char[] chars = concatFromCodeAndToCodes.toCharArray();
+    private void validationAlphabet(String currencyCodes) {
+        char[] chars = currencyCodes.toCharArray();
         for (char ch : chars) {
             if (Character.isDigit(ch)) {
                 throw new WrongFormFields("Поля формы в теле запроса не корректны ");
