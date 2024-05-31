@@ -13,20 +13,22 @@ public class ExchangeRatesDaoImpl implements SpecificExchangeRatesDao<ExchangeRa
     private final ConnectionDao connectionDao;
     String crossCurrency = "USD";
     private static final String GET_ALL_EXCHANGE_RATES = "SELECT * FROM ExchangeRates";
-    private  static final String INNER_JOIN_EXCHANGE_RATES_WITH_CURRENCIES = "SELECT ex.ID AS ID, " +
-            "ex.BaseCurrencyId AS Base_id, " +
-            "bc.Code AS Base_code, ex.TargetCurrencyId AS Target_id, tc.Code AS Target_code, ex.Rate\n" +
-            "from ExchangeRates ex\n" +
-            "    JOIN Currencies bc ON ex.BaseCurrencyId = bc.ID\n" +
-            "    JOIN Currencies tc ON ex.TargetCurrencyId = tc.ID\n" +
-            "    where bc.Code = ? and tc.Code = ?;";
+    private  static final String INNER_JOIN_EXCHANGE_RATES_WITH_CURRENCIES = """
+            SELECT ex.ID AS ID, \
+            ex.BaseCurrencyId AS Base_id, \
+            bc.Code AS Base_code, ex.TargetCurrencyId AS Target_id, tc.Code AS Target_code, ex.Rate
+            from ExchangeRates ex
+                JOIN Currencies bc ON ex.BaseCurrencyId = bc.ID
+                JOIN Currencies tc ON ex.TargetCurrencyId = tc.ID
+                where bc.Code = ? and tc.Code = ?;""";
     private static final String SAVE = "INSERT INTO ExchangeRates (BaseCurrencyId, rate, TargetCurrencyId) VALUES (?,?,?) " +
             "RETURNING id";
 
-    private static final String UPDATE = "UPDATE ExchangeRates\n" +
-            "SET Rate = ?\n" +
-            "WHERE BaseCurrencyId = ? and TargetCurrencyId = ?\n" +
-            "RETURNING ID;";
+    private static final String UPDATE = """
+            UPDATE ExchangeRates
+            SET Rate = ?
+            WHERE BaseCurrencyId = ? and TargetCurrencyId = ?
+            RETURNING ID;""";
 
     public ExchangeRatesDaoImpl(ConnectionDao connectionDao) {
         this.connectionDao = connectionDao;
