@@ -15,7 +15,7 @@ public class ServiceCurrenciesImpl implements ServiceCurrencies{
     private final MapperDto<Currency, CurrencyDTO> mapperCurrencyDto;
 
     public ServiceCurrenciesImpl() {
-        this.currencyDao = new CurrencyDaoImpl();
+        this.currencyDao =  CurrencyDaoImpl.getInstance();
         this.mapperCurrencyDto = new MapperCurrencyDtoImpl();
     }
 

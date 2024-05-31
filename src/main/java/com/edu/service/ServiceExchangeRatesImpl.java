@@ -18,8 +18,8 @@ public class ServiceExchangeRatesImpl implements ServiceExchangeRates{
     private final MapperDto<ExchangeRates, ExchangeRatesDTO> exchangeRatesMapperDto;
 
     public ServiceExchangeRatesImpl() {
-        this. exchangeRatesDao = new ExchangeRatesDaoImpl();
-        this. currencyDao = new CurrencyDaoImpl();
+        this. exchangeRatesDao = ExchangeRatesDaoImpl.getInstance();
+        this. currencyDao = CurrencyDaoImpl.getInstance();
         this. exchangeRatesMapperDto = new MapperExchangeRatesDtoImpl();
     }
 

@@ -22,8 +22,8 @@ public class ServiceConvertCurrenciesImpl implements ServiceConvertCurrencies{
     private final MapperCurrencyExchangeDto<ExchangeRates, CurrencyExchangeDTO> mapperDto;
 
     public ServiceConvertCurrenciesImpl() {
-        this.exchangeRatesDao = new ExchangeRatesDaoImpl();
-        this.currencyDao = new CurrencyDaoImpl();
+        this.exchangeRatesDao = ExchangeRatesDaoImpl.getInstance();
+        this.currencyDao = CurrencyDaoImpl.getInstance();
         this.mapperDto = new MapperCurrencyExchangeDTOImpl();
     }
 

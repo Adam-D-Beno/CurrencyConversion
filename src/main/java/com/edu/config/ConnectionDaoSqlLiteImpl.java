@@ -28,5 +28,4 @@ public class ConnectionDaoSqlLiteImpl implements ConnectionDao{
             throw new RuntimeException(e);
         }
     }
-
 }

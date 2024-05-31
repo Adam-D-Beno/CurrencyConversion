@@ -15,7 +15,7 @@ public class MapperCurrencyExchangeDTOImpl implements MapperCurrencyExchangeDto<
     private final MapperDto<Currency, CurrencyDTO> mapperCurrencyDto;
 
     public MapperCurrencyExchangeDTOImpl() {
-        this.currencyDao = new CurrencyDaoImpl();
+        this.currencyDao = CurrencyDaoImpl.getInstance();
         this.mapperCurrencyDto = new MapperCurrencyDtoImpl();
 
     }
