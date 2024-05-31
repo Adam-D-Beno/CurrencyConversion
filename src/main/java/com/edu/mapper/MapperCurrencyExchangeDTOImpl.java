@@ -4,6 +4,7 @@ import com.edu.dao.CurrencyDaoImpl;
 import com.edu.dao.SpecificCurrencyDao;
 import com.edu.dto.CurrencyDTO;
 import com.edu.dto.CurrencyExchangeDTO;
+import com.edu.exception.CurrencyNotExistInDataBase;
 import com.edu.model.Currency;
 import com.edu.model.ExchangeRates;
 import java.math.BigDecimal;
@@ -19,8 +20,10 @@ public class MapperCurrencyExchangeDTOImpl implements MapperCurrencyExchangeDto<
 
     @Override
     public CurrencyExchangeDTO toDTO(ExchangeRates exchangeRates, BigDecimal amount, BigDecimal convertedAmount) {
-        CurrencyDTO base = getEntityById(exchangeRates.getBaseCurrencyId()).map(mapperCurrencyDto::toDto).get();
-        CurrencyDTO target = getEntityById(exchangeRates.getTargetCurrencyId()).map(mapperCurrencyDto::toDto).get();
+        CurrencyDTO base = getEntityById(exchangeRates.getBaseCurrencyId()).map(mapperCurrencyDto::toDto)
+               .orElseThrow(() -> new CurrencyNotExistInDataBase("Код валюты не найден " + exchangeRates.getBaseCurrencyId()));;
+        CurrencyDTO target = getEntityById(exchangeRates.getTargetCurrencyId()).map(mapperCurrencyDto::toDto)
+                .orElseThrow(() -> new CurrencyNotExistInDataBase("Валюта не найдена " + exchangeRates.getTargetCurrencyId()));;
 
         return new CurrencyExchangeDTO(
                 base,
@@ -35,8 +38,10 @@ public class MapperCurrencyExchangeDTOImpl implements MapperCurrencyExchangeDto<
     public CurrencyExchangeDTO toDTO(String fromCode, String toCode, BigDecimal rate,
                                      BigDecimal amount, BigDecimal convertedAmount) {
 
-        CurrencyDTO base = getByCode(fromCode).map(mapperCurrencyDto::toDto).get();
-        CurrencyDTO target = getByCode(toCode).map(mapperCurrencyDto::toDto).get();
+        CurrencyDTO base = getByCode(fromCode).map(mapperCurrencyDto::toDto)
+                .orElseThrow(() -> new CurrencyNotExistInDataBase("Валюта не найдена " + fromCode));
+        CurrencyDTO target = getByCode(toCode).map(mapperCurrencyDto::toDto)
+                .orElseThrow(() -> new CurrencyNotExistInDataBase("Валюта не найдена " + toCode));
 
         return new CurrencyExchangeDTO(base, target, rate, amount, convertedAmount);
     }
