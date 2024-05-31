@@ -1,7 +1,6 @@
 package com.edu.mapper;
 
 import com.edu.dao.CurrencyDaoImpl;
-import com.edu.dao.SpecificCurrencyDao;
 import com.edu.dto.CurrencyDTO;
 import com.edu.dto.CurrencyExchangeDTO;
 import com.edu.exception.CurrencyNotExistInDataBase;
@@ -21,9 +20,9 @@ public class MapperCurrencyExchangeDTOImpl implements MapperCurrencyExchangeDto<
     @Override
     public CurrencyExchangeDTO toDTO(ExchangeRates exchangeRates, BigDecimal amount, BigDecimal convertedAmount) {
         CurrencyDTO base = getEntityById(exchangeRates.getBaseCurrencyId()).map(mapperCurrencyDto::toDto)
-               .orElseThrow(() -> new CurrencyNotExistInDataBase("Код валюты не найден " + exchangeRates.getBaseCurrencyId()));;
+               .orElseThrow(() -> new CurrencyNotExistInDataBase("Код валюты не найден " + exchangeRates.getBaseCurrencyId()));
         CurrencyDTO target = getEntityById(exchangeRates.getTargetCurrencyId()).map(mapperCurrencyDto::toDto)
-                .orElseThrow(() -> new CurrencyNotExistInDataBase("Валюта не найдена " + exchangeRates.getTargetCurrencyId()));;
+                .orElseThrow(() -> new CurrencyNotExistInDataBase("Валюта не найдена " + exchangeRates.getTargetCurrencyId()));
 
         return new CurrencyExchangeDTO(
                 base,
