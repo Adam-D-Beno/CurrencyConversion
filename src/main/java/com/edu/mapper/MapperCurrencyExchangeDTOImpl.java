@@ -11,13 +11,10 @@ import java.sql.SQLException;
 import java.util.Optional;
 
 public class MapperCurrencyExchangeDTOImpl implements MapperCurrencyExchangeDto<ExchangeRates, CurrencyExchangeDTO>{
-    private final SpecificCurrencyDao<Currency> currencyDao;
     private final MapperDto<Currency, CurrencyDTO> mapperCurrencyDto;
 
     public MapperCurrencyExchangeDTOImpl() {
-        this.currencyDao = CurrencyDaoImpl.getInstance();
         this.mapperCurrencyDto = new MapperCurrencyDtoImpl();
-
     }
 
     @Override
@@ -47,7 +44,7 @@ public class MapperCurrencyExchangeDTOImpl implements MapperCurrencyExchangeDto<
     private Optional<Currency> getEntityById(Long id)  {
 
         try {
-            return   currencyDao.getById(id);
+            return   CurrencyDaoImpl.getInstance().getById(id);
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
@@ -56,7 +53,7 @@ public class MapperCurrencyExchangeDTOImpl implements MapperCurrencyExchangeDto<
     private Optional<Currency> getByCode(String code)  {
 
         try {
-            return currencyDao.getByCode(code);
+            return CurrencyDaoImpl.getInstance().getByCode(code);
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
